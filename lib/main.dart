@@ -18,15 +18,25 @@ class _AppState extends State<App> {
     setState(() {
       _questionIndex++;
     });
-    if(_questionIndex >= _questionList.length) {
+    if(_questionIndex >= _qaList.length) {
       _questionIndex = 0;
     }
   }
 
   var _questionIndex = 0;
-  var _questionList = [
-    "First Question",
-    "Second Question"
+  var _qaList = [
+    {
+      "question": "What is your favorite sport?",
+      "answers": ["Volleyball", "Hockey", "Basketball", "Soccer"],
+    },
+    {
+      "question": "What is your favorite city?",
+      "answers": ["Ottawa", "Paris", "Rome", "Amsterdam"],
+    },
+    {
+      "question": "What is your favorite movie?",
+      "answers": ["If Only", "Lupin", "Dark Knight", "God Father"],
+    },
   ];
 
   @override
@@ -37,20 +47,15 @@ class _AppState extends State<App> {
           title: Text("App Title"),
         ),
         body: Column(
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Question(_questionList[_questionIndex]),
-            Answer(
-              onPressCB: onPressAction,
-              buttonText: 'Answer 1',
-            ),
-            Answer(
-              onPressCB: onPressAction,
-              buttonText: 'Answer 2',
-            ),
-            Answer(
-              onPressCB: onPressAction,
-              buttonText: 'Answer 3',
-            ),
+            Question(_qaList[_questionIndex]["question"] as String),
+            ...(_qaList[_questionIndex]["answers"] as List<String>).map((answer) {
+              return Answer(
+                onPressCB: onPressAction,
+                buttonText: answer,
+              );
+            })
           ],
         ),
       )
