@@ -2,8 +2,29 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(App());
 
-class App extends StatelessWidget {
-  void onPressAction() => print("Button was pressed");
+class App extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return AppState();
+  }
+}
+
+class AppState extends State<App> {
+  void onPressAction() {
+    print("Button was pressed");
+    setState(() {
+      questionIndex++;
+    });
+    if(questionIndex >= questionList.length) {
+      questionIndex = 0;
+    }
+  }
+
+  var questionIndex = 0;
+  var questionList = [
+    "First Question",
+    "Second Question"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +35,7 @@ class App extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text("First question"),
+            Text(questionList[questionIndex]),
             ElevatedButton(
               onPressed: onPressAction,
               child: Text('Answer 1'),
@@ -24,7 +45,7 @@ class App extends StatelessWidget {
               child: Text('Answer 2'),
             ),
             ElevatedButton(
-                onPressed: null,
+                onPressed: onPressAction,
                 child: Text('Answer 3'),
             ),
           ],
