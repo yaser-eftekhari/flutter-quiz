@@ -5,23 +5,23 @@ void main() => runApp(App());
 class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return AppState();
+    return _AppState();
   }
 }
 
-class AppState extends State<App> {
+class _AppState extends State<App> {
   void onPressAction() {
     print("Button was pressed");
     setState(() {
-      questionIndex++;
+      _questionIndex++;
     });
-    if(questionIndex >= questionList.length) {
-      questionIndex = 0;
+    if(_questionIndex >= _questionList.length) {
+      _questionIndex = 0;
     }
   }
 
-  var questionIndex = 0;
-  var questionList = [
+  var _questionIndex = 0;
+  var _questionList = [
     "First Question",
     "Second Question"
   ];
@@ -35,7 +35,7 @@ class AppState extends State<App> {
         ),
         body: Column(
           children: [
-            Text(questionList[questionIndex]),
+            Text(_questionList[_questionIndex]),
             ElevatedButton(
               onPressed: onPressAction,
               child: Text('Answer 1'),
