@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:quiz/question.dart';
+
 void main() => runApp(App());
 
 class App extends StatefulWidget {
@@ -35,7 +37,7 @@ class _AppState extends State<App> {
         ),
         body: Column(
           children: [
-            Text(_questionList[_questionIndex]),
+            Question(_questionList[_questionIndex]),
             ElevatedButton(
               onPressed: onPressAction,
               child: Text('Answer 1'),
