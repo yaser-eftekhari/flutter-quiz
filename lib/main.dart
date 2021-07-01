@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:quiz/question.dart';
+import './question.dart';
+import './answer.dart';
 
 void main() => runApp(App());
 
@@ -38,17 +39,17 @@ class _AppState extends State<App> {
         body: Column(
           children: [
             Question(_questionList[_questionIndex]),
-            ElevatedButton(
-              onPressed: onPressAction,
-              child: Text('Answer 1'),
+            Answer(
+              onPressCB: onPressAction,
+              buttonText: 'Answer 1',
             ),
-            ElevatedButton(
-              onPressed: onPressAction,
-              child: Text('Answer 2'),
+            Answer(
+              onPressCB: onPressAction,
+              buttonText: 'Answer 2',
             ),
-            ElevatedButton(
-                onPressed: onPressAction,
-                child: Text('Answer 3'),
+            Answer(
+              onPressCB: onPressAction,
+              buttonText: 'Answer 3',
             ),
           ],
         ),
