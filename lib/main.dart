@@ -20,6 +20,13 @@ class _AppState extends State<App> {
     _totalScore += score;
   }
 
+  void onResetAction() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
   var _questionIndex = 0;
   var _totalScore = 0;
 
@@ -68,7 +75,7 @@ class _AppState extends State<App> {
                 onPressCB: onPressAction,
                 qaList: _qaList,
               )
-            : Result(_totalScore),
+            : Result(totalScore: _totalScore, resetAction: onResetAction,),
       ),
     );
   }
