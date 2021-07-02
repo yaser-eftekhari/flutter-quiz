@@ -14,17 +14,13 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   void onPressAction() {
-    print("Button was pressed");
     setState(() {
       _questionIndex++;
     });
-    if(_questionIndex >= _qaList.length) {
-      _questionIndex = 0;
-    }
   }
 
   var _questionIndex = 0;
-  var _qaList = [
+  final _qaList = const [
     {
       "question": "What is your favorite sport?",
       "answers": ["Volleyball", "Hockey", "Basketball", "Soccer"],
@@ -46,19 +42,29 @@ class _AppState extends State<App> {
         appBar: AppBar(
           title: Text("App Title"),
         ),
-        body: Column(
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Question(_qaList[_questionIndex]["question"] as String),
-            ...(_qaList[_questionIndex]["answers"] as List<String>).map((answer) {
-              return Answer(
-                onPressCB: onPressAction,
-                buttonText: answer,
-              );
-            })
-          ],
-        ),
-      )
+        body: _questionIndex < _qaList.length
+            ? Column(
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Question(_qaList[_questionIndex]["question"] as String),
+                  // The three dots here spreads the list of Answer widgets to individual Answers to be included as children
+                  // The map operates on the list of answers and dynamically generates the Answer widgets
+                  ...(_qaList[_questionIndex]["answers"] as List<String>)
+                      .map((answer) {
+                    return Answer(
+                      onPressCB: onPressAction,
+                      buttonText: answer,
+                    );
+                  })
+                ],
+              )
+            : Center(
+                child: Text(
+                  "You finished the quiz!",
+                  style: TextStyle(fontSize: 25),
+                ),
+              ),
+      ),
     );
   }
 }
